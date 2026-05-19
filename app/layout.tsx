@@ -19,6 +19,9 @@ export const metadata: Metadata = {
     "Interior Cleaning Aligarh",
     "Car Service Center Aligarh",
   ],
+  verification: {
+    google: "Rks5S_AomvPcP5DX8hv0EMLB33UTF2cun7j0Td7BbN8",
+  },
 };
 
 export default function RootLayout({

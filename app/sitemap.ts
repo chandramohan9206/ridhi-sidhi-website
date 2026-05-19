@@ -3,19 +3,19 @@ import { MetadataRoute } from "next";
 export default function sitemap(): MetadataRoute.Sitemap {
   return [
     {
-      url: "https://yourwebsite.com",
+      url: "https://ridhi-sidhi-website.vercel.app",
       lastModified: new Date(),
     },
     {
-      url: "https://yourwebsite.com/services",
+      url: "https://ridhi-sidhi-website.vercel.app/services",
       lastModified: new Date(),
     },
     {
-      url: "https://yourwebsite.com/gallery",
+      url: "https://ridhi-sidhi-website.vercel.app/gallery",
       lastModified: new Date(),
     },
     {
-      url: "https://yourwebsite.com/contact",
+      url: "https://ridhi-sidhi-website.vercel.app/contact",
       lastModified: new Date(),
     },
   ];

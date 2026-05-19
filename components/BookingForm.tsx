@@ -8,6 +8,7 @@ export default function BookingForm() {
     phone: "",
     service: "",
     date: "",
+    time: "",
     message: "",
   });
 
@@ -20,16 +21,16 @@ export default function BookingForm() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-    const whatsappMessage = `Booking Request:
-Name: ${form.name}
-Phone: ${form.phone}
-Service: ${form.service}
-Date: ${form.date}
-Message: ${form.message}
-`;
+    const whatsappMessage = `Booking Request:%0A
+  Name: ${form.name}%0A
+  Phone: ${form.phone}%0A
+  Service: ${form.service}%0A
+  Date: ${form.date}%0A
+  Time: ${form.time}%0A
+  Message: ${form.message}`;
 
     window.open(
-      `https://wa.me/919672101384?text=${encodeURIComponent(whatsappMessage)}`,
+      `https://wa.me/919672101384?text=${whatsappMessage}`,
       "_blank"
     );
   };
@@ -37,7 +38,7 @@ Message: ${form.message}
   return (
     <form
       onSubmit={handleSubmit}
-      className="bg-white p-6 rounded-2xl shadow-md"
+      className="bg-white/95 backdrop-blur-md p-6 rounded-2xl shadow-xl border border-gray-100"
     >
       <h2 className="text-2xl font-bold text-sky-800">
         Book Your Service / सर्विस बुक करें
@@ -79,10 +80,19 @@ Message: ${form.message}
         />
 
         <input
-          type="text"
+          required
+          type="date"
           name="date"
-          placeholder="Preferred Date (example: Tomorrow 10 AM)"
           value={form.date}
+          onChange={handleChange}
+          className="w-full border p-3 rounded-xl"
+        />
+
+        <input
+          required
+          type="time"
+          name="time"
+          value={form.time}
           onChange={handleChange}
           className="w-full border p-3 rounded-xl"
         />

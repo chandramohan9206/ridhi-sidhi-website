@@ -83,7 +83,7 @@ Message: ${form.message}
 
         <input
           required
-          type="text"
+          type="date"
           name="date"
           value={form.date}
           onChange={handleChange}

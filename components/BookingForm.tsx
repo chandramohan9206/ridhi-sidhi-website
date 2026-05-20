@@ -115,6 +115,7 @@ Message: ${form.message}
           required
           type="date"
           name="date"
+          placeholder="Date"
           value={form.date}
           onChange={handleChange}
           className="w-full border border-gray-300 p-3 rounded-xl bg-white text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-sky-500"
@@ -124,6 +125,7 @@ Message: ${form.message}
           required
           type="time"
           name="time"
+          placeholder="Time"
           value={form.time}
           onChange={handleChange}
           className="w-full border border-gray-300 p-3 rounded-xl bg-white text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-sky-500"

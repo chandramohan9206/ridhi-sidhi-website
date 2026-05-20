@@ -1,6 +1,8 @@
 "use client";
 
 import { useState } from "react";
+import { db } from "@/lib/firebase";
+import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 
 export default function BookingForm() {
   const [form, setForm] = useState({
@@ -12,14 +14,27 @@ export default function BookingForm() {
     message: "",
   });
 
+  const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState("");
+
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleSubmit = async (e: React.FormEvent) => {
+  e.preventDefault();
+  setLoading(true);
+  setSuccess("");
+
+  try {
+    await addDoc(collection(db, "bookings"), {
+      ...form,
+      createdAt: serverTimestamp(),
+    });
+
+    setSuccess("Booking request submitted successfully!");
 
     const whatsappMessage = `Booking Request:
 Name: ${form.name}
@@ -33,8 +48,23 @@ Message: ${form.message}
     window.open(
       `https://wa.me/919672101384?text=${encodeURIComponent(whatsappMessage)}`,
       "_blank"
-      );
-  };
+    );
+
+    setForm({
+      name: "",
+      phone: "",
+      service: "",
+      date: "",
+      time: "",
+      message: "",
+    });
+  } catch (error) {
+    alert("Booking failed. Please try again.");
+  } finally {
+
+  setLoading(false);
+  }
+};
 
   return (
     <form
@@ -55,7 +85,7 @@ Message: ${form.message}
           required
           type="text"
           name="name"
-          placeholder="Your Name"
+          placeholder="Your Name / नाम"
           value={form.name}
           onChange={handleChange}
           className="w-full border border-gray-300 p-3 rounded-xl bg-white text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-sky-500"
@@ -65,7 +95,7 @@ Message: ${form.message}
           required
           type="text"
           name="phone"
-          placeholder="Phone Number"
+          placeholder="Phone Number / मोबाइल नंबर"
           value={form.phone}
           onChange={handleChange}
           className="w-full border border-gray-300 p-3 rounded-xl bg-white text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-sky-500"
@@ -108,11 +138,14 @@ Message: ${form.message}
         ></textarea>
 
         <button
+          disabled={loading}
           type="submit"
           className="w-full bg-green-500 text-white py-3 rounded-xl font-semibold hover:bg-green-600"
         >
-          Send Booking Request / WhatsApp पर भेजें
+          {loading ? "Submitting..." : "Send Booking Request / Whatsapp पर भेजें"}
         </button>
+
+        {success && <p className="text-green-600 text-sm">{success}</p>}
       </div>
     </form>
   );

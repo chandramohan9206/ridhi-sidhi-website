@@ -8,6 +8,7 @@ export default function BookingForm() {
     phone: "",
     service: "",
     date: "",
+    time: "",
     message: "",
   });
 
@@ -25,6 +26,7 @@ Name: ${form.name}
 Phone: ${form.phone}
 Service: ${form.service}
 Date: ${form.date}
+Time: ${form.time}
 Message: ${form.message}
 `;
 
@@ -48,6 +50,7 @@ Message: ${form.message}
       </p>
 
       <div className="mt-5 space-y-4">
+
         <input
           required
           type="text"
@@ -55,7 +58,7 @@ Message: ${form.message}
           placeholder="Your Name"
           value={form.name}
           onChange={handleChange}
-          className="w-full border p-3 rounded-xl"
+          className="w-full border border-gray-300 p-3 rounded-xl bg-white text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-sky-500"
         />
 
         <input
@@ -65,7 +68,7 @@ Message: ${form.message}
           placeholder="Phone Number"
           value={form.phone}
           onChange={handleChange}
-          className="w-full border p-3 rounded-xl"
+          className="w-full border border-gray-300 p-3 rounded-xl bg-white text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-sky-500"
         />
 
         <input
@@ -75,16 +78,25 @@ Message: ${form.message}
           placeholder="Service (Car Wash / Foam Wash / Polishing...)"
           value={form.service}
           onChange={handleChange}
-          className="w-full border p-3 rounded-xl"
+          className="w-full border border-gray-300 p-3 rounded-xl bg-white text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-sky-500"
         />
 
         <input
+          required
           type="text"
           name="date"
-          placeholder="Preferred Date (example: Tomorrow 10 AM)"
           value={form.date}
           onChange={handleChange}
-          className="w-full border p-3 rounded-xl"
+          className="w-full border border-gray-300 p-3 rounded-xl bg-white text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-sky-500"
+        />
+
+        <input
+          required
+          type="time"
+          name="time"
+          value={form.time}
+          onChange={handleChange}
+          className="w-full border border-gray-300 p-3 rounded-xl bg-white text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-sky-500"
         />
 
         <textarea
@@ -92,7 +104,7 @@ Message: ${form.message}
           placeholder="Extra Message (optional)"
           value={form.message}
           onChange={handleChange}
-          className="w-full border p-3 rounded-xl h-28"
+          className="w-full border border-gray-300 p-3 rounded-xl bg-white text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-sky-500"
         ></textarea>
 
         <button
